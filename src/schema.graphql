@@ -1,0 +1,95 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type User {
+  fullName: String!
+  email: String!
+}
+
+type Message {
+  message: String
+  statusCode: Int
+}
+
+type Authentication {
+  fullName: String!
+  email: String!
+  auth_token: String
+}
+
+type Data {
+  message: String
+  statusCode: Int
+  user: Authentication
+}
+
+type UserPaginated {
+  total: Int!
+  users: [User!]!
+}
+
+type Query {
+  findAll: [User!]!
+  findOneUser(userDetail: UserFind!): User!
+  forgotPassword(forgotPass: Email!): Message!
+  getListInPagination(pageinate: PaginationtInput!): UserPaginated!
+  resendAccountVerificationEmail(resendVerificationEmail: Email!): Message!
+  greetings: String!
+}
+
+input UserFind {
+  fullName: String
+  email: String
+  _id: String
+}
+
+input Email {
+  email: String!
+}
+
+input PaginationtInput {
+  page: Int!
+  limit: Int!
+}
+
+type Mutation {
+  updateUser(updateUserInput: UpdateUserInput!): User!
+  resetPassword(resetPassword: ResetPasswords!): Message!
+  updatePassword(updatePassword: UpdatePasswords!): Message!
+  removeUser(removeUser: Email!): Message!
+  signUpUser(signUpUser: CreateAuthInput!): Message!
+  signInUser(signInUser: LoginAuth!): Data!
+}
+
+input UpdateUserInput {
+  fullName: String! = ""
+  firstName: String! = ""
+  lastName: String! = ""
+  mobileNumber: String! = ""
+  age: Int
+}
+
+input ResetPasswords {
+  email: String!
+  newPassword: String!
+  confirmPassword: String!
+  token: Int!
+}
+
+input UpdatePasswords {
+  oldPassword: String!
+  newPassword: String!
+  confirmPassword: String!
+}
+
+input CreateAuthInput {
+  email: String!
+  password: String!
+  fullName: String!
+}
+
+input LoginAuth {
+  email: String = ""
+  password: String!
+}
